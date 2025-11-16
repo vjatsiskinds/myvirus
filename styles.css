@@ -120,6 +120,37 @@ body {
     box-shadow: 0 5px 15px var(--shadow);
 }
 
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
+}
+
+.mobile-menu-btn span {
+    width: 25px;
+    height: 3px;
+    background: var(--dark-brown);
+    transition: all 0.3s;
+    border-radius: 3px;
+}
+
+.mobile-menu-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
 /* Hero Section */
 .hero {
     background: linear-gradient(135deg, var(--primary-orange) 0%, var(--light-orange) 100%);
@@ -570,15 +601,17 @@ body {
     font-weight: 600;
 }
 
-/* Roadmap Section */
+/* Roadmap Section - MOBILE FRIENDLY */
 .roadmap {
     background: var(--cream);
     padding: 80px 0;
+    overflow-x: hidden;
 }
 
 .roadmap-timeline {
     max-width: 900px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
 .roadmap-item {
@@ -586,6 +619,7 @@ body {
     gap: 30px;
     margin-bottom: 50px;
     position: relative;
+    width: 100%;
 }
 
 .roadmap-item:not(:last-child)::before {
@@ -625,6 +659,7 @@ body {
     border: 3px solid var(--dark-brown);
     flex: 1;
     transition: all 0.3s;
+    min-width: 0;
 }
 
 .roadmap-content:hover {
@@ -650,6 +685,7 @@ body {
     color: var(--gray-brown);
     font-weight: 500;
     font-size: 15px;
+    word-wrap: break-word;
 }
 
 .roadmap-content li::before {
@@ -699,11 +735,10 @@ body {
     box-shadow: 0 20px 40px var(--shadow);
 }
 
-/* Custom Video Player Styling */
 .custom-video-player {
     position: relative;
     width: 100%;
-    padding-bottom: 177.78%; /* 9:16 aspect ratio */
+    padding-bottom: 177.78%;
     background: #000;
     overflow: hidden;
 }
@@ -718,14 +753,11 @@ body {
     background: #000;
 }
 
-/* Hide TikTok UI elements using CSS */
 .tiktok-video {
-    /* Force video to fill frame */
     transform: scale(1.15);
     transform-origin: center center;
 }
 
-/* Video Overlay - appears on hover */
 .video-overlay {
     position: absolute;
     bottom: 0;
@@ -870,7 +902,6 @@ body {
     opacity: 0.6;
 }
 
-/* Success message for copy button */
 .copied-message {
     position: fixed;
     top: 100px;
@@ -935,8 +966,40 @@ body {
         padding: 0 15px;
     }
     
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
     .nav-menu {
-        display: none;
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: var(--cream);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 40px 20px;
+        gap: 25px;
+        transition: left 0.3s ease;
+        box-shadow: 0 5px 20px var(--shadow);
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .nav-menu li {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .nav-menu a {
+        display: block;
+        padding: 15px 20px;
+        font-size: 18px;
+        border-bottom: 2px solid var(--light-orange);
     }
     
     .logo-text {
@@ -1058,20 +1121,24 @@ body {
         padding: 60px 0;
     }
     
+    .roadmap-timeline {
+        padding: 0 15px;
+    }
+    
     .roadmap-item {
-        gap: 20px;
+        gap: 15px;
         margin-bottom: 40px;
     }
     
     .roadmap-item:not(:last-child)::before {
-        left: 40px;
-        top: 80px;
+        left: 37px;
+        top: 75px;
     }
     
     .phase {
-        width: 80px;
-        height: 80px;
-        font-size: 13px;
+        width: 75px;
+        height: 75px;
+        font-size: 12px;
     }
     
     .roadmap-content {
@@ -1079,16 +1146,19 @@ body {
     }
     
     .roadmap-content h3 {
-        font-size: 19px;
+        font-size: 18px;
+        margin-bottom: 12px;
     }
     
     .roadmap-content li {
         font-size: 14px;
-        padding-left: 28px;
+        padding-left: 25px;
+        padding-top: 6px;
+        padding-bottom: 6px;
     }
     
     .roadmap-content:hover {
-        transform: translateY(-5px);
+        transform: none;
         box-shadow: 0 8px 20px var(--shadow);
     }
     
@@ -1213,35 +1283,41 @@ body {
         font-size: 24px;
     }
     
+    .roadmap-timeline {
+        padding: 0 10px;
+    }
+    
     .roadmap-item {
-        flex-direction: column;
-        align-items: center;
+        gap: 12px;
+        margin-bottom: 35px;
     }
     
     .roadmap-item:not(:last-child)::before {
-        left: 50%;
-        transform: translateX(-50%);
+        left: 32px;
         top: 65px;
-        height: calc(100% - 30px);
+        width: 3px;
     }
     
     .phase {
-        width: 70px;
-        height: 70px;
-        font-size: 12px;
+        width: 65px;
+        height: 65px;
+        font-size: 11px;
+        border: 4px solid var(--dark-brown);
+    }
+    
+    .roadmap-content {
+        padding: 15px;
     }
     
     .roadmap-content h3 {
-        font-size: 18px;
+        font-size: 16px;
+        margin-bottom: 10px;
     }
     
     .roadmap-content li {
         font-size: 13px;
-    }
-    
-    .roadmap-content:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 15px var(--shadow);
+        padding-left: 23px;
+        line-height: 1.5;
     }
     
     .video-grid {
@@ -1267,7 +1343,6 @@ body {
     }
 }
 
-/* Animations */
 @keyframes slideInUp {
     from {
         opacity: 0;
